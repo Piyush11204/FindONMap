@@ -24,8 +24,6 @@ const profileSchema = new mongoose.Schema(
         latitude: {
             type: Number, min: -90, max: 90,
             index: true,
-
-
         },
         longitude: {
             type: Number, min: -180, max: 180,

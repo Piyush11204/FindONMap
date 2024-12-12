@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ProfileForm = ({ 
+const ProfileForm = ({
   initialData = {
     name: '',
     email: '',
@@ -10,12 +10,13 @@ const ProfileForm = ({
     address: '',
     latitude: '',
     longitude: '',
-  }, 
-  onSubmit, 
-  onCancel, 
-  isEditing = false 
+  },
+  onSubmit,
+  onCancel,
+  isEditing = false,
 }) => {
   const [formData, setFormData] = useState(initialData);
+  const [imageFile, setImageFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +26,29 @@ const ProfileForm = ({
     }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    // Prepare form data for submission
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('phoneNumber', formData.phoneNumber);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('address', formData.address);
+    formDataToSend.append('latitude', formData.latitude);
+    formDataToSend.append('longitude', formData.longitude);
+
+    if (imageFile) {
+      formDataToSend.append('profileImage', imageFile);
+    }
+
+    onSubmit(formDataToSend);
   };
 
   return (
@@ -40,45 +61,45 @@ const ProfileForm = ({
           <div className="grid gap-4">
             <div>
               <label className="block font-medium">Name</label>
-              <input 
-                type="text" 
-                name="name" 
+              <input
+                type="text"
+                name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 className="w-full border rounded-md p-2"
-                required 
+                required
               />
             </div>
 
             <div>
               <label className="block font-medium">Email</label>
-              <input 
-                type="email" 
-                name="email" 
+              <input
+                type="email"
+                name="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 className="w-full border rounded-md p-2"
-                required 
+                required
               />
             </div>
 
             <div>
               <label className="block font-medium">Phone</label>
-              <input 
-                type="text" 
-                name="phoneNumber" 
+              <input
+                type="text"
+                name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
                 className="w-full border rounded-md p-2"
-                required 
+                required
               />
             </div>
 
             <div>
               <label className="block font-medium">Address</label>
-              <input 
-                type="text" 
-                name="address" 
+              <input
+                type="text"
+                name="address"
                 value={formData.address}
                 onChange={handleInputChange}
                 className="w-full border rounded-md p-2"
@@ -88,9 +109,9 @@ const ProfileForm = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block font-medium">Latitude</label>
-                <input 
-                  type="text" 
-                  name="latitude" 
+                <input
+                  type="text"
+                  name="latitude"
                   value={formData.latitude}
                   onChange={handleInputChange}
                   className="w-full border rounded-md p-2"
@@ -99,9 +120,9 @@ const ProfileForm = ({
 
               <div>
                 <label className="block font-medium">Longitude</label>
-                <input 
-                  type="text" 
-                  name="longitude" 
+                <input
+                  type="text"
+                  name="longitude"
                   value={formData.longitude}
                   onChange={handleInputChange}
                   className="w-full border rounded-md p-2"
@@ -110,20 +131,19 @@ const ProfileForm = ({
             </div>
 
             <div>
-              <label className="block font-medium">Profile Image URL</label>
-              <input 
-                type="text" 
-                name="profileImageUrl" 
-                value={formData.profileImageUrl}
-                onChange={handleInputChange}
+              <label className="block font-medium">Profile Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
                 className="w-full border rounded-md p-2"
               />
             </div>
 
             <div>
               <label className="block font-medium">Description</label>
-              <textarea 
-                name="description" 
+              <textarea
+                name="description"
                 value={formData.description}
                 onChange={handleInputChange}
                 className="w-full border rounded-md p-2"
@@ -132,15 +152,15 @@ const ProfileForm = ({
           </div>
 
           <div className="flex justify-end mt-4">
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={onCancel}
               className="px-4 py-2 border rounded-md mr-2"
             >
               Cancel
             </button>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="px-4 py-2 bg-blue-500 text-white rounded-md"
             >
               {isEditing ? 'Update Profile' : 'Create Profile'}

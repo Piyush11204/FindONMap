@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
 
@@ -23,7 +23,7 @@ const Navbar = () => {
                     to="/" 
                     className="text-white text-2xl font-bold hover:text-gray-300 transition-colors duration-300"
                 >
-                    YourLogo
+                    FindOnMap
                 </Link>
 
                 {/* Mobile Menu Toggle */}

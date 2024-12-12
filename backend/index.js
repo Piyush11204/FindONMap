@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import app from "./app.js"; // Import the app from app.js
 
+
 // Connect to MongoDB without deprecated options
 mongoose
 	.connect(process.env.DB_URI)

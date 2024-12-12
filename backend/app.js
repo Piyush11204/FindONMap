@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.router.js";
 import ProfileRouter from "./routes/profile.router.js";
+
 dotenv.config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors(corsOptions));
 // Middleware setup
 app.use(express.json());
 app.use(cookieParser());
+
 
 // Routes
 app.use("/api/auth", authRoutes);
