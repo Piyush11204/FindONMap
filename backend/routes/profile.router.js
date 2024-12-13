@@ -11,7 +11,7 @@ import { Router } from "express";
 const router = Router();
 
 // Create a new profile
-router.post("/create",uploadProfileImage, createProfile);
+router.post("/create", createProfile);
 
 // Get all profiles
 router.get("/getall", getProfiles);

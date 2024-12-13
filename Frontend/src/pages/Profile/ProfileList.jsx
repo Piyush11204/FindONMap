@@ -1,11 +1,17 @@
-
 import { Trash2, Edit } from 'lucide-react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileList = ({ profiles, onEditProfile, onDeleteProfile }) => {
+  const navigate = useNavigate();
+
+  const handleViewMore = (profileId) => {
+    navigate(`http://localhost:3000/api/profiles/${profileId}`);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {profiles.map(profile => (
+      {profiles.map((profile) => (
         <div key={profile._id} className="border rounded-lg p-4 shadow">
           {profile.profileImageUrl && (
             <img 
@@ -32,12 +38,19 @@ const ProfileList = ({ profiles, onEditProfile, onDeleteProfile }) => {
             >
               <Trash2 className="inline-block mr-2" size={16} /> Delete
             </button>
+            <button 
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              onClick={() => handleViewMore(profile._id)}
+            >
+              View More
+            </button>
           </div>
         </div>
       ))}
     </div>
   );
 };
+
 ProfileList.propTypes = {
   profiles: PropTypes.arrayOf(
     PropTypes.shape({

@@ -37,7 +37,6 @@ const LoginPage = () => {
             }
 
             // Handle successful login
-            console.log("Login successful:", data);
             setMessage("Login successful");
 
             // Show success toast
@@ -56,17 +55,20 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 space-y-6">
                 <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        Sign in to your account
+                    <h2 className="text-center text-2xl font-bold text-gray-800">
+                        Welcome Back
                     </h2>
+                    <p className="text-center text-sm text-gray-600">
+                        Sign in to continue
+                    </p>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-                    <div className="rounded-md shadow-sm space-y-4">
+                <form className="space-y-6" onSubmit={handleLogin}>
+                    <div className="space-y-4">
                         <div>
-                            <label htmlFor="email" className="sr-only">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email address
                             </label>
                             <input
@@ -74,14 +76,14 @@ const LoginPage = () => {
                                 name="email"
                                 type="email"
                                 required
-                                className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                                placeholder="Email address"
+                                className="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                placeholder="Enter your email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="sr-only">
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Password
                             </label>
                             <input
@@ -89,8 +91,8 @@ const LoginPage = () => {
                                 name="password"
                                 type="password"
                                 required
-                                className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                                placeholder="Password"
+                                className="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                placeholder="Enter your password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -98,13 +100,13 @@ const LoginPage = () => {
                     </div>
 
                     {error && (
-                        <div className="text-red-500 text-sm text-center">
+                        <div className="text-red-600 text-sm text-center">
                             {error}
                         </div>
                     )}
 
                     {message && (
-                        <div className="text-blue-300 text-sm text-center">
+                        <div className="text-green-600 text-sm text-center">
                             {message}
                         </div>
                     )}
@@ -113,12 +115,12 @@ const LoginPage = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-400 disabled:cursor-not-allowed"
+                            className="w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed"
                         >
                             {loading ? (
-                                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <span className="flex items-center">
                                     <svg
-                                        className="animate-spin h-5 w-5 text-white"
+                                        className="animate-spin h-5 w-5 text-white mr-2"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -137,6 +139,7 @@ const LoginPage = () => {
                                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                                         />
                                     </svg>
+                                    Signing in...
                                 </span>
                             ) : (
                                 "Sign in"
@@ -147,13 +150,12 @@ const LoginPage = () => {
                 <div className="text-center">
                     <Link
                         to="/register"
-                        className="font-medium text-blue-600 hover:text-blue-500"
+                        className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                     >
-                        Dont have an account? Register
+                        Don’t have an account? Register
                     </Link>
                 </div>
             </div>
-            {/* Toast container for notifications */}
             <ToastContainer />
         </div>
     );

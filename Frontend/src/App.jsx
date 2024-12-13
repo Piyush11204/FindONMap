@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
+import ProfileDetails from "./pages/Profile/Profiledetails.jsx";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             </PrivateRoute>
           } 
         />
+        <Route path = "/profiles/:id" element = {<ProfileDetails/>} />
       </Routes>
     </Router>
   );
